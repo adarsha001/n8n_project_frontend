@@ -8,14 +8,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-    /* Professional Color Palette */
     :root {
-        --stop-red: #D90429;      /* Deep, urgent crimson */
-        --wait-yellow: #FFB703;   /* Rich amber */
-        --go-green: #008148;      /* Trustworthy forest green */
+        --stop-red: #D90429;
+        --wait-yellow: #FFB703;
+        --go-green: #008148;
         --ink: #121212;
         --white: #FFFFFF;
-        --off-white: #F8F9FA;
+        --grey: #666666;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,7 +28,6 @@
         min-height: 100vh;
     }
 
-    /* 1080x1080 Square Card */
     .news-card {
         width: 1080px;
         height: 1080px;
@@ -37,13 +35,12 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        box-shadow: 0 0 100px rgba(0,0,0,0.5);
     }
 
-    /* 🔴 STOP SECTION: BRAND & HEADLINE */
+    /* 🔴 STOP SECTION */
     .section-stop {
         background: var(--white);
-        border-top: 24px solid var(--stop-red); /* The "Stop" signal */
+        border-top: 24px solid var(--stop-red);
         padding: 40px 60px;
         flex-shrink: 0;
     }
@@ -52,7 +49,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
     }
 
     .logo-text {
@@ -95,127 +92,110 @@
         object-fit: cover;
     }
 
-    /* 🟡 WAIT SECTION: KEY INSIGHT */
+    /* 🟡 WAIT SECTION */
     .section-wait {
         background: var(--wait-yellow);
-        padding: 30px 60px;
+        padding: 35px 60px;
         display: flex;
-        align-items: center;
-        gap: 30px;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        flex-direction: column;
+        gap: 5px;
     }
 
     .signal-label {
         font-family: 'Bebas Neue', sans-serif;
-        font-size: 24px;
-        background: var(--ink);
-        color: var(--white);
-        padding: 4px 12px;
-        border-radius: 4px;
+        font-size: 20px;
+        letter-spacing: 1px;
+        color: rgba(0,0,0,0.6);
+        margin-bottom: 5px;
     }
 
     .fact-primary {
-        font-size: 32px;
-        font-weight: 700;
+        font-size: 34px;
+        font-weight: 800;
         color: var(--ink);
         line-height: 1.1;
-        letter-spacing: -0.5px;
     }
 
-    /* 🟢 GO SECTION: ACTION / DETAIL */
+    /* 🟢 GO SECTION */
     .section-go {
         background: var(--go-green);
         color: var(--white);
         padding: 40px 60px;
-        position: relative;
     }
 
     .fact-secondary {
         font-size: 24px;
         font-weight: 400;
         line-height: 1.4;
-        opacity: 0.95;
-        max-width: 90%;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
     }
 
-    .footer-bar {
+    /* 🔗 SOURCE FOOTER */
+    .source-footer {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        margin-top: 10px;
+        gap: 10px;
         padding-top: 20px;
         border-top: 1px solid rgba(255,255,255,0.2);
-    }
-
-    .url {
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
         font-size: 14px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: rgba(255,255,255,0.8);
     }
 
-    .cta {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 28px;
-        letter-spacing: 2px;
-    }
+    .source-label { color: var(--wait-yellow); }
 
 </style>
 </head>
 <body>
 
 <div class="news-card">
-    
     <header class="section-stop">
         <div class="brand-row">
             <div class="logo-text">SWIFT<span>FEED</span></div>
-            <div class="meta-tag" id="categoryTag">BREAKING</div>
+            <div id="categoryTag" class="meta-tag">BREAKING</div>
         </div>
-        <h1 class="headline" id="headline"></h1>
+        <h1 class="headline" id="headline">Loading...</h1>
     </header>
 
     <div class="image-container">
-        <img id="newsImage" src="https://images.unsplash.com/photo-1611974714658-20da5d376a92?auto=format&fit=crop&q=80&w=1080" />
+        <img id="newsImage" src="" />
     </div>
 
     <section class="section-wait">
-        <!-- <div class="signal-label">WAIT</div> -->
+        <div class="signal-label">KEY INSIGHT</div>
         <div class="fact-primary" id="fact1"></div>
     </section>
 
     <footer class="section-go">
-        <!-- <div class="signal-label" style="background: white; color: var(--go-green); margin-bottom: 15px; display: inline-block;">GO</div> -->
-        <div class="fact-secondary" id="fact2">
-          
-        </div>
+        <div class="fact-secondary" id="fact2"></div>
         
-        <!-- <div class="footer-bar">
-            <span class="url">Swiftfeed.com</span>
-            <span class="cta">KEEP MOVING ›</span>
-        </div> -->
+        <div class="source-footer">
+            <span class="source-label">Source:</span>
+            <span id="sourceName">External Report</span>
+        </div>
     </footer>
-
 </div>
 
 <script>
     const params = new URLSearchParams(window.location.search);
-    const elements = {
-        headline: document.getElementById("headline"),
-        image: document.getElementById("newsImage"),
-        fact1: document.getElementById("fact1"),
-        fact2: document.getElementById("fact2"),
-        category: document.getElementById("categoryTag")
-    };
-
+    
     document.addEventListener("DOMContentLoaded", () => {
-        if (params.get("headline")) elements.headline.innerText = params.get("headline");
-        if (params.get("image"))    elements.image.src = params.get("image");
-        if (params.get("fact1"))    elements.fact1.innerText = params.get("fact1");
-        if (params.get("fact2"))    elements.fact2.innerText = params.get("fact2");
-        if (params.get("category")) elements.category.innerText = params.get("category").toUpperCase();
+        const headline = params.get("headline");
+        const image = params.get("image");
+        const fact1 = params.get("fact1");
+        const fact2 = params.get("fact2");
+        const source = params.get("source");
+        const category = params.get("category");
+
+        if (headline) document.getElementById("headline").innerText = headline;
+        if (image)    document.getElementById("newsImage").src = image;
+        if (fact1)    document.getElementById("fact1").innerText = fact1;
+        if (fact2)    document.getElementById("fact2").innerText = fact2;
+        if (source)   document.getElementById("sourceName").innerText = source;
+        if (category) document.getElementById("categoryTag").innerText = category.toUpperCase();
     });
 </script>
-
 </body>
 </html>
