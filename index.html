@@ -8,11 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
   --red:    #E8160C;
@@ -20,8 +16,6 @@
   --green:  #16B84E;
   --ink:    #0D0D0D;
   --white:  #FAFAFA;
-  --card-w: 1080px;
-  --card-h: 1080px;
 }
 
 body {
@@ -34,92 +28,69 @@ body {
   padding: 40px 20px;
 }
 
-/* ─── CARD SHELL ─────────────────────────────────── */
+/* ── CARD ───────────────────────────────────────── */
 .news-card {
-  width: var(--card-w);
-  height: var(--card-h);
+  width: 1080px;
+  height: 1080px;
   background: var(--white);
-  position: relative;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.7);
 }
 
-/* ─── TRAFFIC SIGNAL STRIPE ─────────────────────── */
-.signal-stripe {
-  display: flex;
-  height: 16px;
+/* ═══════════════════════════════════════════
+   🔴 RED — TOP — STOP
+   Red bar + dark header + headline
+═══════════════════════════════════════════ */
+.top-red-bar {
+  height: 14px;
+  background: var(--red);
   flex-shrink: 0;
 }
-.signal-stripe .seg {
-  flex: 1;
-}
-.signal-stripe .seg-red    { background: var(--red); }
-.signal-stripe .seg-yellow { background: var(--yellow); }
-.signal-stripe .seg-green  { background: var(--green); }
 
-/* ─── HEADER ─────────────────────────────────────── */
 .header {
+  background: var(--ink);
+  padding: 16px 32px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 32px 14px;
   flex-shrink: 0;
-  border-bottom: 2px solid var(--ink);
 }
 
+/* ── BIRD + NEST LOGO ── */
 .logo-wrap {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
-
-/* traffic light icon */
-.tl-icon {
-  width: 24px;
-  height: 58px;
-  background: var(--ink);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 5px 0;
-  flex-shrink: 0;
+.logo-svg-wrap svg {
+  width: 76px;
+  height: 54px;
+  display: block;
 }
-.tl-icon .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.tl-icon .dot-r { background: var(--red); }
-.tl-icon .dot-y { background: var(--yellow); }
-.tl-icon .dot-g { background: var(--green); }
-
 .logo-text {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  letter-spacing: 0.06em;
-  color: var(--ink);
+  font-size: 38px;
+  letter-spacing: 0.08em;
+  color: var(--white);
   line-height: 1;
 }
-.logo-text span {
-  color: var(--red);
+.logo-text em {
+  font-style: normal;
+  color: var(--yellow);
 }
 
-.header-meta {
-  text-align: right;
-}
+.header-meta { text-align: right; }
 .header-meta .tag {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  font-weight: 800;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--white);
   background: var(--red);
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 2px;
   display: inline-block;
 }
@@ -127,145 +98,140 @@ body {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  color: #888;
-  margin-top: 4px;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.4);
+  margin-top: 5px;
   text-transform: uppercase;
 }
 
-/* ─── HEADLINE ───────────────────────────────────── */
+/* headline — left red accent border signals STOP */
 .headline-section {
-  padding: 20px 32px 16px;
+  background: var(--white);
+  padding: 18px 32px 16px;
   flex-shrink: 0;
-  border-bottom: 1.5px solid #e0e0e0;
+  border-left: 8px solid var(--red);
+  border-bottom: 2px solid #e2e2e2;
 }
-
-.section-rule {
+.stop-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 7px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  gap: 7px;
 }
-.section-rule .rule-dot {
-  width: 10px;
-  height: 10px;
+.stop-label::before {
+  content: '';
+  width: 7px; height: 7px;
   border-radius: 50%;
   background: var(--red);
+  display: inline-block;
   flex-shrink: 0;
 }
-.section-rule .rule-line {
-  height: 2px;
-  background: var(--ink);
-  flex: 1;
-}
-.section-rule .rule-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #888;
-  flex-shrink: 0;
-}
-
 .headline-section h1 {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 72px;
-  line-height: 0.95;
+  font-size: 70px;
+  line-height: 0.93;
   letter-spacing: 0.01em;
   color: var(--ink);
   text-transform: uppercase;
 }
 
-/* ─── IMAGE ──────────────────────────────────────── */
+/* ═══════════════════════════════════════════
+   🖼 IMAGE — bridge between red & yellow
+═══════════════════════════════════════════ */
 .image-wrap {
   flex: 1;
   position: relative;
   overflow: hidden;
   min-height: 0;
 }
-
 .image-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
-/* gradient vignette over image */
 .image-wrap::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 50%,
-    rgba(13,13,13,0.55) 100%
-  );
+  background: linear-gradient(to bottom, transparent 45%, rgba(13,13,13,0.58) 100%);
   pointer-events: none;
 }
 
-/* ─── STOP BAND — RED ────────────────────────────── */
-.band-stop {
+/* ═══════════════════════════════════════════
+   🟡 YELLOW — MIDDLE — WAIT
+   Key headline fact
+═══════════════════════════════════════════ */
+.band-wait {
   flex-shrink: 0;
-  background: var(--red);
-  padding: 14px 32px;
+  background: var(--yellow);
+  padding: 15px 32px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
+  border-top: 5px solid #c9a000;
+  border-bottom: 5px solid #c9a000;
 }
-.band-stop .signal-badge {
+.band-wait .signal-badge {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  color: var(--red);
-  background: var(--white);
-  padding: 3px 10px 2px;
-  border-radius: 2px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--yellow);
+  background: var(--ink);
+  padding: 4px 11px 3px;
+  border-radius: 3px;
   flex-shrink: 0;
   line-height: 1;
 }
-.band-stop h2 {
+.band-wait h2 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 22px;
-  font-weight: 800;
-  color: var(--white);
+  font-weight: 900;
+  color: var(--ink);
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.15;
 }
 
-/* ─── WAIT BAND — YELLOW ─────────────────────────── */
-.band-wait {
+/* ═══════════════════════════════════════════
+   🟢 GREEN — BOTTOM — GO
+   Detail fact + footer
+═══════════════════════════════════════════ */
+.band-go-fact {
   flex-shrink: 0;
-  background: var(--yellow);
-  padding: 12px 32px;
+  background: #0ea83e;
+  padding: 14px 32px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
 }
-.band-wait .signal-badge {
+.band-go-fact .signal-badge {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  color: var(--yellow);
-  background: var(--ink);
-  padding: 3px 10px 2px;
-  border-radius: 2px;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: #0ea83e;
+  background: var(--white);
+  padding: 4px 11px 3px;
+  border-radius: 3px;
   flex-shrink: 0;
   line-height: 1;
 }
-.band-wait p {
+.band-go-fact p {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 19px;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--white);
   letter-spacing: 0.02em;
   line-height: 1.2;
 }
 
-/* ─── GO BAND — GREEN ────────────────────────────── */
-.band-go {
+.band-go-footer {
   flex-shrink: 0;
   background: var(--green);
   padding: 10px 32px;
@@ -273,7 +239,7 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.band-go .go-left {
+.band-go-footer span {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -281,18 +247,10 @@ body {
   text-transform: uppercase;
   color: rgba(255,255,255,0.8);
 }
-.band-go .go-right {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.8);
-}
-.band-go .go-center {
+.band-go-footer .center {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 15px;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.35em;
   color: var(--white);
 }
 </style>
@@ -300,74 +258,65 @@ body {
 <body>
 <div class="news-card">
 
-  <!-- traffic signal stripe top -->
-  <div class="signal-stripe">
-    <div class="seg seg-red"></div>
-    <div class="seg seg-yellow"></div>
-    <div class="seg seg-green"></div>
-  </div>
+  <!-- 🔴 RED stripe at very top -->
+  <div class="top-red-bar"></div>
 
-  <!-- header -->
+  <!-- HEADER with Bird+Nest logo -->
   <div class="header">
     <div class="logo-wrap">
-      <div class="tl-icon">
-        <div class="dot dot-r"></div>
-        <div class="dot dot-y"></div>
-        <div class="dot dot-g"></div>
-      </div>
-      <div class="logo-text">Swift<span>Feed</span></div>
+
+      <!-- SVG: Swift bird flying toward nest -->
+    
+
+      <div class="logo-text">Swift<em>Feed</em></div>
     </div>
+
     <div class="header-meta">
       <div class="tag" id="categoryTag">BREAKING</div>
       <div class="date" id="dateLabel">Today</div>
     </div>
   </div>
 
-  <!-- headline -->
+  <!-- 🔴 HEADLINE — STOP -->
   <div class="headline-section">
-    <div class="section-rule">
-      <div class="rule-dot"></div>
-      <div class="rule-line"></div>
-      <div class="rule-label">Top Story</div>
-    </div>
+    <div class="stop-label">Stop &amp; Read</div>
     <h1 id="headline">Loading Headline…</h1>
   </div>
 
-  <!-- image -->
+  <!-- IMAGE -->
   <div class="image-wrap">
     <img id="newsImage" src="" alt="News" />
   </div>
 
-  <!-- STOP — key fact -->
-  <div class="band-stop">
-    <div class="signal-badge">STOP</div>
+  <!-- 🟡 KEY FACT — WAIT -->
+  <div class="band-wait">
+    <div class="signal-badge">WAIT</div>
     <h2 id="fact1">Key fact loading…</h2>
   </div>
 
-  <!-- WAIT — context -->
-  <div class="band-wait" id="fact2Container" style="display:none;">
-    <div class="signal-badge">WAIT</div>
+  <!-- 🟢 DETAIL — GO -->
+  <div class="band-go-fact" id="fact2Container" style="display:none;">
+    <div class="signal-badge">GO</div>
     <p id="fact2"></p>
   </div>
 
-  <!-- GO — footer -->
-  <div class="band-go">
-    <span class="go-left">swiftfeed.com</span>
-    <span class="go-center">GO DEEPER ›</span>
-    <span class="go-right">Stay Informed</span>
+  <!-- 🟢 FOOTER -->
+  <div class="band-go-footer">
+    <span>swiftfeed.com</span>
+    <span class="center">GO DEEPER ›</span>
+    <span>Stay Informed</span>
   </div>
 
 </div>
 
 <script>
-  const params = new URLSearchParams(window.location.search);
-
-  const headline  = params.get("headline");
-  const image     = params.get("image");
-  const fact1     = params.get("fact1");
-  const fact2     = params.get("fact2");
-  const category  = params.get("category");
-  const date      = params.get("date");
+  const params   = new URLSearchParams(window.location.search);
+  const headline = params.get("headline");
+  const image    = params.get("image");
+  const fact1    = params.get("fact1");
+  const fact2    = params.get("fact2");
+  const category = params.get("category");
+  const date     = params.get("date");
 
   document.addEventListener("DOMContentLoaded", () => {
     if (headline) document.getElementById("headline").innerText = headline;
@@ -378,8 +327,9 @@ body {
       document.getElementById("fact2Container").style.display = "flex";
     }
     if (category) document.getElementById("categoryTag").innerText = category.toUpperCase();
-    if (date)     document.getElementById("dateLabel").innerText = date;
-    else {
+    if (date) {
+      document.getElementById("dateLabel").innerText = date;
+    } else {
       const d = new Date();
       document.getElementById("dateLabel").innerText =
         d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
