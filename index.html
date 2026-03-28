@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Viral Feed | Dark Edition</title>
-
 <style>
   * {
     margin: 0;
@@ -13,46 +11,41 @@
   }
 
   body {
-    background: #121212; /* Darker page background */
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Arial Black', sans-serif; /* Aggressive bold font */
-    padding: 20px;
+    font-family: 'Arial Black', Gadget, sans-serif;
+    padding: 10px;
   }
 
-  /* MAIN CARD — Now pure black with no borders/shadows for high impact */
   .news-card {
-    max-width: 600px;
+    max-width: 1080px;
     width: 100%;
-    background: #000000;
+    background: #000;
     display: flex;
     flex-direction: column;
     position: relative;
-    overflow: hidden;
   }
 
-  /* HEADER SECTION — Updated for bold yellow text */
   .header {
-    padding: 25px 20px;
+    padding: 30px 20px;
     text-align: center;
   }
 
-  /* HEADLINE — Strong Yellow, All Caps */
   .headline {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 900;
-    line-height: 1.2;
-    color: #f6e500; /* Signature Viral Yellow */
+    line-height: 1.1;
+    color: #f6e500;
     text-transform: uppercase;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
   }
 
-  /* IMAGE ZONE — Full width, no padding */
   .image-container {
     width: 100%;
-    background: #111;
+    background: #000;
   }
 
   .image-container img {
@@ -62,58 +55,72 @@
     object-fit: cover;
   }
 
-  /* CONTENT AREA */
   .content {
-    padding: 25px 20px;
+    padding: 30px 20px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     text-align: center;
   }
 
-  /* PRIMARY TEXT — The main quote in Yellow */
   .primary-text {
-    font-size: 26px;
+    font-size: 32px;
     font-weight: 900;
     color: #f6e500;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .secondary-text {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
     line-height: 1.1;
     text-transform: uppercase;
   }
 
-  /* SECONDARY TEXT — Accent text in White */
-  .secondary-text {
-    font-size: 20px;
-    font-weight: 900;
-    color: #ffffff;
-    line-height: 1.2;
-    text-transform: uppercase;
-  }
-
-  /* FOOTER — Simple and clean */
+  /* REFINED FOOTER - Including Emojis, Source, and Watermark */
   .footer {
-    padding: 0 20px 30px 20px;
-    font-size: 28px;
+    padding: 10px 20px 40px 20px;
     text-align: center;
   }
 
-  /* Hiding decorative elements from previous design to match new minimalist style */
-  .accent-strip, .brand-row, .insight-label::before {
-    display: none;
+  .emojis {
+    font-size: 36px;
+    margin-bottom: 20px;
+    display: block;
   }
 
-  .source, .watermark {
+  .source {
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+
+  .source span {
+    color: #f6e500; /* Source name highlighted in yellow */
+  }
+
+  .watermark {
     color: #555;
     font-size: 12px;
-    text-transform: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-family: sans-serif;
+  }
+
+  /* Hidden UI from original template */
+  .accent-strip, .brand-row, .insight-label, .category {
+    display: none;
   }
 </style>
 </head>
 <body>
 
 <div class="news-card">
-  <div class="accent-strip"></div>
-
   <div class="header">
     <div id="headline" class="headline">
       ACTOR FROM RAMAYANA, WHO PLAYS VISHWAMITRA, RECENTLY SHARED HIGH PRAISE FOR YASH'S PORTRAYAL OF RAVANA
@@ -121,12 +128,12 @@
   </div>
 
   <div class="image-container">
-    <img id="newsImage" alt="Ravana" src="https://via.placeholder.com/600x700/111/f6e500?text=YASH+AS+RAVANA">
+    <img id="newsImage" alt="Ravana" src="https://via.placeholder.com/1080x1350/111/f6e500?text=IMAGE+GOES+HERE">
   </div>
 
   <div class="content">
     <div id="fact1" class="primary-text">
-      HE SAID: "WORKING WITH YASH IN RAMAYANA... WHAT AN ACTOR. THE AURA, THE POWER, THE WAY HE'S OWNED RAVANA — JUST CRAZY."
+      HE SAID: "WORKING WITH YASH IN RAMAYANA... WHAT AN ACTOR. THE AURA, THE POWER, THE WAY HE'S OWNED RAVANA — JUST_CRAZY."
     </div>
 
     <div id="fact2" class="secondary-text">
@@ -135,10 +142,11 @@
   </div>
 
   <div class="footer">
-  
-    <div class="source" style="margin-top: 15px;">
-      Source: <span id="sourceName">Screenplay Memes</span>
+
+    <div class="source">
+      SOURCE: <span id="sourceName"></span>
     </div>
+  
   </div>
 </div>
 
@@ -150,16 +158,24 @@
       const el = document.getElementById(elementId);
       if (el && newText) el.innerText = newText.toUpperCase();
     }
-    
-    // Existing logic preserved
-    const headlineParam = urlParams.get("headline");
-    const fact1Param = urlParams.get("fact1");
-    const fact2Param = urlParams.get("fact2");
-    
+
+    function setImage(imageUrl) {
+      const imgEl = document.getElementById("newsImage");
+      if (imgEl && imageUrl) imgEl.src = imageUrl;
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
+      const headlineParam = urlParams.get("headline");
+      const fact1Param = urlParams.get("fact1");
+      const fact2Param = urlParams.get("fact2");
+      const sourceParam = urlParams.get("source");
+      const imageParam = urlParams.get("image");
+
       if (headlineParam) setText("headline", headlineParam);
       if (fact1Param) setText("fact1", fact1Param);
       if (fact2Param) setText("fact2", fact2Param);
+      if (sourceParam) setText("sourceName", sourceParam);
+      if (imageParam) setImage(imageParam);
     });
   })();
 </script>
